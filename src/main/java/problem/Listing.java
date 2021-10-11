@@ -3,7 +3,8 @@ package problem;
 import java.util.Objects;
 
 /**
- * represent a generic Listing containing a contract and property
+ * Represents a generic Listing containing a contract and property.
+ *
  * @param <C> - Contract, a contract class object
  * @param <P> - AbstractProperty, a property class object
  */
@@ -24,7 +25,7 @@ public class Listing<C extends AbstractContract, P extends AbstractProperty> {
   }
 
   /**
-   * @return - Contract,
+   * @return - Contract
    */
   public C getContract() {
     return this.contract;
@@ -37,6 +38,30 @@ public class Listing<C extends AbstractContract, P extends AbstractProperty> {
     return this.property;
   }
 
+  /**
+   * Sets the contract - Contract, represent listing's contract
+   *
+   * @param contract - Contract, represent listing's contract
+   */
+  public void setContract(C contract) {
+    this.contract = contract;
+  }
+
+  /**
+   * Sets the property - AbstractProperty, represents listing's property
+   *
+   * @param property - AbstractProperty, represents listing's property
+   */
+  public void setProperty(P property) {
+    this.property = property;
+  }
+  
+  /**
+   * Evaluates whether an object is the same as a listing.
+   *
+   * @param o the object being compared to the listing.
+   * @return true if the object is the same as the listing, false, otherwise.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -49,12 +74,23 @@ public class Listing<C extends AbstractContract, P extends AbstractProperty> {
     return getContract().equals(listing.getContract()) && getProperty()
         .equals(listing.getProperty());
   }
-
+  
+  /**
+   * Returns the integer hashcode representation of a listing.
+   *
+   * @return the integer hashcode representation of a listing.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getContract(), getProperty());
   }
-
+  
+  /**
+   * Returns a string describing a listing, with information about the contract
+   * and property.
+   *
+   * @return a string describing a listing.
+   */
   @Override
   public String toString() {
     return "Listing{" +

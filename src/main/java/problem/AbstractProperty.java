@@ -2,31 +2,60 @@ package problem;
 
 import java.util.Objects;
 
+/**
+ * Abstract class AbstractProperty, that holds address and the size of the property.
+ */
 public abstract class AbstractProperty {
 
   protected static final int ZERO = 0;
   private String address;
-  private Integer size; // (non-negative)
+  private Integer size;
 
+  /**
+   * Constructor of the AbstractProperty class
+   *
+   * @param address - String, address of the property
+   * @param size    - Integer, the size of the property
+   */
   public AbstractProperty(String address, Integer size) {
     this.address = address;
-    this.size = this.validInteger(size);
+    this.size = this.validSize(size);
   }
 
+  /**
+   * Returns the address - String, address of the property
+   *
+   * @return address - String, address of the property
+   */
   public String getAddress() {
     return this.address;
   }
 
+  /**
+   * Sets the address - String, address of the property
+   *
+   * @param address - String, address of the property
+   */
   public void setAddress(String address) {
     this.address = address;
   }
 
+  /**
+   * Returns the size - Integer, the size of the property
+   *
+   * @return size - Integer, the size of the property
+   */
   public Integer getSize() {
     return this.size;
   }
 
+  /**
+   * Sets the size - Integer, the size of the property
+   *
+   * @param size - Integer, the size of the property
+   */
   public void setSize(Integer size) {
-    this.size = size;
+    this.size = this.validSize(size);
   }
 
   @Override
@@ -34,16 +63,16 @@ public abstract class AbstractProperty {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof AbstractProperty)) {
       return false;
     }
     AbstractProperty that = (AbstractProperty) o;
-    return address.equals(that.address) && size.equals(that.size);
+    return getAddress().equals(that.getAddress()) && getSize().equals(that.getSize());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(address, size);
+    return Objects.hash(getAddress(), getSize());
   }
 
   @Override
@@ -54,11 +83,18 @@ public abstract class AbstractProperty {
         '}';
   }
 
-  protected Integer validInteger(Integer number) throws IllegalArgumentException{
-    if (number < ZERO) {
-      throw new IllegalArgumentException("Invalid Argument. Please enter a non-negative number!");
+  /**
+   * Method that checks if the size is non-negative, throws the IllegalArgumentException otherwise.
+   *
+   * @param size - Integer, the size of the property
+   * @return the size, Integer the size of the property if the size is greater than zero
+   * @throws IllegalArgumentException if the parsed size is negative
+   */
+  private Integer validSize(Integer size) throws IllegalArgumentException {
+    if (size < ZERO) {
+      throw new IllegalArgumentException("Invalid size. Please enter a non-negative number!");
     }
-    return number;
+    return size;
   }
 }
 
