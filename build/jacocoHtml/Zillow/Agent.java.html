@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Agent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hw07</a> &gt; <a href="index.source.html" class="el_package">Zillow</a> &gt; <span class="el_source">Agent.java</span></div><h1>Agent.java</h1><pre class="source lang-java linenums">package Zillow;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class Agent&lt;P extends AbstractProperty, C extends AbstractContract&gt; implements IAgent{
+
+  private String name;
+  private List&lt;Listing&lt;P,C&gt;&gt; collectionOfTheirCurrentListing;
+  private Double commissionRate;
+  private Double totalEarnings;
+  private boolean takesOnResidential;
+  private boolean takesOnCommercial;
+  private boolean takesOnSales;
+  private boolean takesOnRental;
+
+<span class="nc" id="L18">  private static final Double ZERO = 0.0;</span>
+<span class="nc" id="L19">  private static final Double ONE = 1.0;</span>
+
+  public Agent(String name, Double commissionRate, Double totalEarnings, boolean takesOnResidential,
+<span class="nc" id="L22">      boolean takesOnCommercial, boolean takesOnSales, boolean takesOnRental) {</span>
+<span class="nc" id="L23">    this.name = name;</span>
+<span class="nc" id="L24">    this.collectionOfTheirCurrentListing = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L25">    this.commissionRate = this.validCommissionRate(commissionRate);</span>
+<span class="nc" id="L26">    this.totalEarnings = this.validTotalEarnings(totalEarnings);</span>
+<span class="nc" id="L27">    this.takesOnResidential = takesOnResidential;</span>
+<span class="nc" id="L28">    this.takesOnCommercial = takesOnCommercial;</span>
+<span class="nc" id="L29">    this.takesOnSales = takesOnSales;</span>
+<span class="nc" id="L30">    this.takesOnRental = takesOnRental;</span>
+<span class="nc" id="L31">  }</span>
+
+  public String getName() {
+<span class="nc" id="L34">    return name;</span>
+  }
+
+  public List&lt;Listing&lt;P, C&gt;&gt; getCollectionOfTheirCurrentListing() {
+<span class="nc" id="L38">    return collectionOfTheirCurrentListing;</span>
+  }
+
+  public Double getCommissionRate() {
+<span class="nc" id="L42">    return commissionRate;</span>
+  }
+
+  public Double getTotalEarnings() {
+<span class="nc" id="L46">    return totalEarnings;</span>
+  }
+
+  public void setName(String name) {
+<span class="nc" id="L50">    this.name = name;</span>
+<span class="nc" id="L51">  }</span>
+
+  public void setCollectionOfTheirCurrentListing(
+      List&lt;Listing&lt;P, C&gt;&gt; collectionOfTheirCurrentListing) {
+<span class="nc" id="L55">    this.collectionOfTheirCurrentListing = collectionOfTheirCurrentListing;</span>
+<span class="nc" id="L56">  }</span>
+
+  public void setCommissionRate(Double commissionRate) {
+<span class="nc" id="L59">    this.commissionRate = commissionRate;</span>
+<span class="nc" id="L60">  }</span>
+
+  public void setTotalEarnings(Double totalEarnings) {
+<span class="nc" id="L63">    this.totalEarnings = totalEarnings;</span>
+<span class="nc" id="L64">  }</span>
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L69">      return true;</span>
+    }
+<span class="nc bnc" id="L71" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L72">      return false;</span>
+    }
+<span class="nc" id="L74">    Agent&lt;?, ?&gt; agent = (Agent&lt;?, ?&gt;) o;</span>
+<span class="nc bnc" id="L75" title="All 8 branches missed.">    return takesOnResidential == agent.takesOnResidential</span>
+        &amp;&amp; takesOnCommercial == agent.takesOnCommercial &amp;&amp; takesOnSales == agent.takesOnSales
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        &amp;&amp; takesOnRental == agent.takesOnRental &amp;&amp; name.equals(agent.name)</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        &amp;&amp; collectionOfTheirCurrentListing.equals(agent.collectionOfTheirCurrentListing)</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">        &amp;&amp; commissionRate.equals(agent.commissionRate) &amp;&amp; totalEarnings.equals(agent.totalEarnings);</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L84">    return Objects.hash(name, collectionOfTheirCurrentListing, commissionRate, totalEarnings,</span>
+<span class="nc" id="L85">        takesOnResidential, takesOnCommercial, takesOnSales, takesOnRental);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L90">    return &quot;Agent{&quot; +</span>
+        &quot;name='&quot; + name + '\'' +
+        &quot;, collectionOfTheirCurrentListing=&quot; + collectionOfTheirCurrentListing +
+        &quot;, commissionRate=&quot; + commissionRate +
+        &quot;, totalEarnings=&quot; + totalEarnings +
+        '}';
+  }
+
+  private Double validCommissionRate(Double validCommissionRate) {
+<span class="nc bnc" id="L99" title="All 4 branches missed.">  if (validCommissionRate &lt; ZERO || validCommissionRate &gt; ONE) {</span>
+<span class="nc" id="L100">    throw new IllegalArgumentException(</span>
+        &quot;Invalid commission rate, please enter a number between 0 and 1&quot;);
+  }
+<span class="nc" id="L103">  return validCommissionRate;</span>
+  }
+
+  private Double validTotalEarnings(Double validTotalEarnings){
+<span class="nc bnc" id="L107" title="All 2 branches missed.">    if (validTotalEarnings &lt; ZERO) {</span>
+<span class="nc" id="L108">      throw new IllegalArgumentException(&quot;Invalid Earning Amount. Please enter a non-negative number!&quot;);</span>
+    }
+<span class="nc" id="L110">    return validTotalEarnings;</span>
+  }
+
+  @Override
+  public void addListing(Listing listing) {
+<span class="nc" id="L115">    AbstractProperty property = listing.getProperty();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    if (property instanceof ResidentialProperty) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">      if (!takesOnResidential) {</span>
+<span class="nc" id="L118">        return; //Don't add this listing</span>
+      }
+<span class="nc bnc" id="L120" title="All 2 branches missed.">    } else if (property instanceof CommercialProperty) {</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">      if (!takesOnCommercial) {</span>
+<span class="nc" id="L122">        return;</span>
+      }
+    }
+<span class="nc" id="L125">    AbstractContract contract = listing.getContract();</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">    if(contract instanceof SaleContract){</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">      if(!takesOnSales){</span>
+<span class="nc" id="L128">        return;</span>
+      }
+<span class="nc bnc" id="L130" title="All 2 branches missed.">    } else if (contract instanceof RentalContract){</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">      if(!takesOnRental){</span>
+<span class="nc" id="L132">        return;</span>
+      }
+    }
+<span class="nc" id="L135">    this.collectionOfTheirCurrentListing.add(listing);</span>
+<span class="nc" id="L136">  }</span>
+
+  @Override
+  public void completeListing(Listing listing) throws ListingDoesNotExistException {
+<span class="nc" id="L140">    double commissionEarnings = calculateCommissionEarnings(listing);</span>
+<span class="nc" id="L141">    this.totalEarnings += commissionEarnings;</span>
+<span class="nc" id="L142">    dropListing(listing); // will throw an exception in drop listing</span>
+<span class="nc" id="L143">  }</span>
+
+  private double calculateCommissionEarnings(Listing listing) {
+<span class="nc" id="L146">    double commissionEarnings = 0;</span>
+<span class="nc" id="L147">    AbstractContract contract = listing.getContract();</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">    if (contract instanceof RentalContract){</span>
+<span class="nc" id="L149">      RentalContract rentalContract = (RentalContract) contract;</span>
+<span class="nc" id="L150">      commissionEarnings = this.commissionRate * rentalContract.askingPrice * rentalContract.getTerm();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">    } else if ( contract instanceof SaleContract){</span>
+<span class="nc" id="L152">      commissionEarnings = this.commissionRate * contract.askingPrice;</span>
+    }
+<span class="nc" id="L154">    return commissionEarnings;</span>
+  }
+
+  @Override
+  public void dropListing(Listing listing) throws ListingDoesNotExistException {
+<span class="nc bnc" id="L159" title="All 2 branches missed.">    if (this.collectionOfTheirCurrentListing.contains(listing))</span>
+<span class="nc" id="L160">      this.collectionOfTheirCurrentListing.remove(listing);</span>
+    else
+<span class="nc" id="L162">      throw new ListingDoesNotExistException(&quot;The listing to be removed is not included in the collection&quot;);</span>
+<span class="nc" id="L163">  }</span>
+
+  /**
+   *  This returns the amount of money the Agent would make if they successfully completed
+   *  all listings in their collection. To calculate the
+   * value of a listing, use the same formulas given for a completed listing.
+   * @return
+   */
+  @Override
+  public double getTotalPortfolioValue() {
+<span class="nc" id="L173">    double totalValue = 0;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">  for (int i =0; i &lt; this.collectionOfTheirCurrentListing.size(); i++)</span>
+<span class="nc" id="L175">    totalValue += this.calculateCommissionEarnings(this.collectionOfTheirCurrentListing.get(i));</span>
+<span class="nc" id="L176">  return totalValue;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

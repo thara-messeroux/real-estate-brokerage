@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Agent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hw07</a> &gt; <a href="index.source.html" class="el_package">problem</a> &gt; <span class="el_source">Agent.java</span></div><h1>Agent.java</h1><pre class="source lang-java linenums">package problem;
+
+import java.util.ArrayList;
+
+/**
+ * Class Agent stores information about an agent. Agents are people responsible for adding listings to the company site.
+ * @param &lt;C&gt; - Abstract Contract class generic extension.
+ * @param &lt;P&gt; - Abstract Property class generic extension.
+ */
+public class Agent&lt;C extends AbstractContract, P extends AbstractProperty&gt; implements IAgent&lt;C,P&gt;{
+
+<span class="fc" id="L12">  private static final Double ZERO = 0.0;</span>
+<span class="fc" id="L13">  private static final Double ONE = 1.0;</span>
+
+  private String name;
+  private ArrayList&lt;Listing&lt;C, P&gt;&gt; collectionOfTheirCurrentListing;
+  private Double commissionRate;
+  private Double totalEarnings;
+
+  /**
+   * Constructor for the class Agent.
+   * @param name - String, representing the agent's name.
+   * @param collectionOfTheirCurrentListing - Array List, representing the collection of the agent's current listing.
+   * @param commissionRate - Double, representing the agent's commission rate, represented as a double between 0 and 1 (inclusive).
+   * @param totalEarnings - Double, non-negative, representing the total amount the Agent has earned from their sales / rentals.
+   */
+<span class="fc" id="L27">  public Agent(String name, ArrayList&lt;Listing&lt;C, P&gt;&gt; collectionOfTheirCurrentListing, Double commissionRate, Double totalEarnings) {</span>
+<span class="fc" id="L28">    this.name = name;</span>
+<span class="fc" id="L29">    this.collectionOfTheirCurrentListing = collectionOfTheirCurrentListing;</span>
+<span class="fc" id="L30">    this.commissionRate = this.validCommissionRate(commissionRate);</span>
+<span class="fc" id="L31">    this.totalEarnings = this.validTotalEarnings(totalEarnings);</span>
+<span class="fc" id="L32">  }</span>
+
+  /**
+   * This method validates the agent's commission rate, which is represented as a double between 0 and 1 (inclusive).
+   * @param validCommissionRate - Double, representing the agent's commission rate.
+   * @return a valid commission rate.
+   */
+  private Double validCommissionRate(Double validCommissionRate) {
+<span class="pc bpc" id="L40" title="2 of 4 branches missed.">  if (validCommissionRate &lt; ZERO || validCommissionRate &gt; ONE) {</span>
+<span class="nc" id="L41">    throw new IllegalArgumentException(</span>
+        &quot;Invalid commission rate, please enter a number between 0 and 1&quot;);
+  }
+<span class="fc" id="L44">  return validCommissionRate;</span>
+  }
+
+  /**
+   * This method validates the agent's total earnings which is represented as a non-negative double. This is the total
+   * amount the Agent has earned from their sales / rentals.
+   * @param validTotalEarnings - Double, representing the agent's valid total earnings.
+   * @return a valid total earnings.
+   */
+  private Double validTotalEarnings(Double validTotalEarnings){
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">    if (validTotalEarnings &lt; ZERO) {</span>
+<span class="nc" id="L55">      throw new IllegalArgumentException(&quot;Invalid Earning Amount. Please enter a non-negative number!&quot;);</span>
+    }
+<span class="fc" id="L57">    return validTotalEarnings;</span>
+  }
+
+  /**
+   * This method Adds an (appropriate) listing to the Agentâ€™s current listing collection.
+   * @param listing - Generic Listing class, the agent's (appropriate) listing.
+   */
+  @Override
+  public void addListing(Listing&lt;C, P&gt; listing) {
+<span class="fc" id="L66">    this.collectionOfTheirCurrentListing.add(listing);</span>
+<span class="fc" id="L67">  }</span>
+
+  /**
+   * This method will be called when an Agent successfully makes a sale / rental of one of their listings.
+   * Assuming the listing is part of their collection, this method should remove the Listing from their
+   * collection and add their commission earnings to their total earnings amount.
+   * @param listing - Generic Listing class, the agent's (appropriate) listing.
+   * @throws ListingDoesNotExistException - exception to handle the case where the listing passed to method is not
+   * present in the Agentâ€™s collection
+   */
+  @Override
+  public void completeListing(Listing listing) throws ListingDoesNotExistException {
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">    if (!this.collectionOfTheirCurrentListing.contains(listing)) {</span>
+<span class="fc" id="L80">      throw new ListingDoesNotExistException(&quot;The listing is not included in the collection&quot;);</span>
+    }
+<span class="nc" id="L82">    this.totalEarnings += this.getListingCommissionValue(listing);</span>
+<span class="nc" id="L83">    this.dropListing(listing);</span>
+<span class="nc" id="L84">  }</span>
+
+  /**
+   * This method drops a listing from the Agentâ€™s collection without adjusting their earnings. You may
+   * decide how to handle the case where the listing passed to method is not present in the Agentâ€™s collection.
+   * @param listing - Generic Listing class, the agent's (appropriate) listing.
+   * @throws ListingDoesNotExistException - exception to handle the case where the listing passed to method is not
+   *  present in the Agentâ€™s collection
+   */
+  @Override
+  public void dropListing(Listing listing) throws ListingDoesNotExistException {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">    if (this.collectionOfTheirCurrentListing.contains(listing))</span>
+<span class="fc" id="L96">      this.collectionOfTheirCurrentListing.remove(listing);</span>
+    else
+<span class="nc" id="L98">      throw new ListingDoesNotExistException(&quot;The listing to be removed is not included in the collection&quot;);</span>
+<span class="fc" id="L99">  }</span>
+
+  /**
+   * This method returns the amount of money the Agent would make if they successfully completed all
+   * listings in their collection.
+   * @return - returns the total value of the portfolio.
+   */
+  @Override
+  public double getTotalPortfolioValue() {
+<span class="nc" id="L108">    double totalValue = 0.0;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">    for (Listing&lt;C, P&gt; listing: this.collectionOfTheirCurrentListing)</span>
+<span class="nc" id="L110">      totalValue += this.getListingCommissionValue(listing);</span>
+<span class="nc" id="L111">    return totalValue;</span>
+  }
+
+  /**
+   * Calculates the value of a listing commission.
+   * @param listing - Generic Listing class, the agent's (appropriate) listing.
+   * @return - returns the value of a listing commission.
+   */
+  private Double getListingCommissionValue(Listing listing) {
+<span class="nc" id="L120">    return listing.getContract().getCommissionValue() * this.commissionRate;</span>
+  }
+
+  /**
+   * Gives the agent's name.
+   * @return the name of the agent.
+   */
+  public String getName() {
+<span class="nc" id="L128">    return this.name;</span>
+  }
+
+  /**
+   * Gives the agent's current collection of listing.
+   * @return - the agent's current collection of listing.
+   */
+  public ArrayList&lt;Listing&lt;C, P&gt;&gt; getCollectionOfTheirCurrentListing() {
+<span class="fc" id="L136">    return this.collectionOfTheirCurrentListing;</span>
+  }
+
+  /**
+   * Gives the agent's commission rate.
+   * @return - the agent's commission rate.
+   */
+  public Double getCommissionRate() {
+<span class="nc" id="L144">    return this.commissionRate;</span>
+  }
+
+  /**
+   * Gives the agent's total earnings.
+   * @return - the agent's total earnings.
+   */
+  public Double getTotalEarnings() {
+<span class="nc" id="L152">    return this.totalEarnings;</span>
+  }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

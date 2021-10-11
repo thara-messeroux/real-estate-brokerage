@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RentalContract.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hw07</a> &gt; <a href="index.source.html" class="el_package">problem</a> &gt; <span class="el_source">RentalContract.java</span></div><h1>RentalContract.java</h1><pre class="source lang-java linenums">package problem;
+
+import java.util.Objects;
+
+/**
+ * represents a Rental contract
+ */
+public class RentalContract extends AbstractContract{
+
+<span class="fc" id="L10">  private static final Integer ZERO = 0;</span>
+  private Integer termMonths;
+
+
+  /**
+   * Constructor for a Rental contract class
+   *
+   * @param askingPrice  - Double representing the contract's asking price
+   * @param isNegotiable - Boolean, represents whether or not the asking price is negotiable
+   * @param termMonths - Integer, representing the length of the contract
+   * @throws IllegalArgumentException
+   */
+  public RentalContract(Double askingPrice, Boolean isNegotiable, Integer termMonths) throws IllegalArgumentException {
+<span class="fc" id="L23">    super(askingPrice, isNegotiable);</span>
+<span class="fc" id="L24">    this.termMonths = validTerm(termMonths);</span>
+<span class="fc" id="L25">  }</span>
+
+  /**
+   * @return - Integer, representing the length of the contract
+   */
+  public Integer getTermMonths() {
+<span class="nc" id="L31">    return this.termMonths;</span>
+  }
+
+  /**
+   * validates if given term is non-negative
+   * @param term - Integer, term to validate
+   * @return - Integer, term if valid
+   * @throws IllegalArgumentException - Exception, thrown if term is negative
+   */
+  private Integer validTerm (Integer term) throws IllegalArgumentException{
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">    if (term &lt; ZERO) {</span>
+<span class="nc" id="L42">      throw new IllegalArgumentException(&quot;Invalid term. Please enter a non-negative number!&quot;);</span>
+    }
+<span class="fc" id="L44">    return term;</span>
+  }
+
+  @Override
+  protected Double getCommissionValue() {
+<span class="nc" id="L49">    return super.getCommissionValue() * this.termMonths;</span>
+  }
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">    if (this == o) return true;</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">    if (!(o instanceof RentalContract)) return false;</span>
+<span class="nc" id="L56">    RentalContract rental = (RentalContract) o;</span>
+<span class="nc" id="L57">    return getTermMonths().equals(rental.getTermMonths());</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L62">    return Objects.hash(getTermMonths());</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L67">    return &quot;Rental{&quot; +</span>
+        &quot;askingPrice=&quot; + askingPrice +
+        &quot;, isNegotiable=&quot; + isNegotiable +
+        &quot;, termMonths=&quot; + termMonths +
+        '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

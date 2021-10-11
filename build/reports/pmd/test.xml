@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.26.0" timestamp="2021-07-10T00:27:43.444">
+<file name="/Users/tkozhabekkyzy/Desktop/Hw07TK/src/test/java/problem/AgentTest.java">
+<violation beginline="52" endline="52" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="problem" class="AgentTest" method="addListing" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="53" endline="53" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="problem" class="AgentTest" method="addListing" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="55" endline="55" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="problem" class="AgentTest" method="addListing" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="56" endline="56" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="problem" class="AgentTest" method="addListing" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+</pmd>

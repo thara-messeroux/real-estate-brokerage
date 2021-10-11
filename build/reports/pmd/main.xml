@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.26.0" timestamp="2021-07-10T00:27:42.141">
+<file name="/Users/tkozhabekkyzy/Desktop/Hw07TK/src/main/java/problem/AbstractProperty.java">
+<violation beginline="13" endline="13" begincolumn="17" endcolumn="39" rule="ConstructorCallsOverridableMethod" ruleset="Error Prone" package="problem" class="AbstractProperty" method="AbstractProperty" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_errorprone.html#constructorcallsoverridablemethod" priority="1">
+Overridable method 'validInteger' called during object construction
+</violation>
+</file>
+</pmd>

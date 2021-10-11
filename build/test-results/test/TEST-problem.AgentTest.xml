@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="problem.AgentTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-07-10T00:49:28" hostname="DESKTOP-K02I9I6" time="0.022">
+  <properties/>
+  <testcase name="getTotalEarnings" classname="problem.AgentTest" time="0.003"/>
+  <testcase name="getListingCommissionValue" classname="problem.AgentTest" time="0.0"/>
+  <testcase name="getCollectionOfTheirCurrentListing" classname="problem.AgentTest" time="0.0"/>
+  <testcase name="testDropListing1" classname="problem.AgentTest" time="0.0"/>
+  <testcase name="testCompleteListing1" classname="problem.AgentTest" time="0.001"/>
+  <testcase name="getCommissionRate" classname="problem.AgentTest" time="0.0"/>
+  <testcase name="addListing" classname="problem.AgentTest" time="0.015"/>
+  <system-out><![CDATA[PRINT
+[Listing{contract=null, property=null}]
+PRINT2
+[Listing{contract=null, property=null}]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
